@@ -1,35 +1,27 @@
-import Item from "../item/Item";
-import HeaderToDoList from "../headerToDo/HeaderToDo";
-import { useState } from "react";
+import React, { useState } from 'react';
+import HeaderToDoList from '../headerToDo/HeaderToDo';
+import Item from '../item/Item';
 
-
-
-function ToDoList() {
-
+const ToDoList = () => {
     const [list, setList] = useState([]);
-    const [itemText, setItemText] = useState('');
 
-    const addItem = () => {
-        const newItem = <Item text={itemText} isDone={false} />;
+    const addItem = (text) => {
+        const newItem = { text: text, isDone: false };
         setList([...list, newItem]);
     };
 
-    const handleInputChange = (event) => {
-        setItemText(event.target.value);
-    };
-
     return (
-        <>
-            <HeaderToDoList itemText={itemText} handleInputChange={handleInputChange} addItem={addItem} />
+        <div>
+            <HeaderToDoList addItem={addItem} />
             <ul className="list">
                 {list.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={index}>
+                        <Item text={item.text} isDone={item.isDone} />
+                    </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
-}
-
-
+};
 
 export default ToDoList;

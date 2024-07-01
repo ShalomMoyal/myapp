@@ -1,18 +1,17 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const Item = (props) => {
-
-    return(
-    <div>
-        <label>{props.text}</label>
-    </div>
-    )
-}
-
+const Item = ({ text, isDone }) => {
+    return (
+        <div>
+            <label>{text}</label>
+        </div>
+    );
+};
 
 Item.propTypes = {
-    text: PropTypes.string,
+    text: PropTypes.string.isRequired,
     isDone: PropTypes.bool,
 };
+
 export default Item;

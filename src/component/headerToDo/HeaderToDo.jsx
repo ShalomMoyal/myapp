@@ -1,19 +1,31 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const HeaderToDoList = (props) => {
+const HeaderToDoList = ({ addItem }) => {
+    const [itemText, setItemText] = useState('');
+
+    const handleInputChange = (event) => {
+        setItemText(event.target.value);
+    };
+
+    const handleAddItem = () => {
+        if (itemText.trim() !== '') {
+            addItem(itemText);
+            setItemText('');
+        }
+    };
+
     return (
         <div>
             <h3>To-Do List:</h3>
-            <input type="text" value={props.itemText} onChange={props.handleInputChange} />
-            <button onClick={props.addItem}>Add Item</button>
+            <input type="text" value={itemText} onChange={handleInputChange} />
+            <button onClick={handleAddItem}>Add Item</button>
         </div>
     );
 };
 
 HeaderToDoList.propTypes = {
-    itemText: PropTypes.string,
-    handleInputChange: PropTypes.func,
-    addItem: PropTypes.func,
+    addItem: PropTypes.func.isRequired,
 };
 
 export default HeaderToDoList;
